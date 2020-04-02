@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>panel de admin</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/estilos_panel.css">
+</head>
+<body>
+
+	<!--zona del logo y del login-->
+
+	<header>
+		<div class="wrapper">
+		<div class="logo">
+			<a href="../index.php"><img src="../img/logo2.png" width="200px" height="150px"></a>
+		</div>
+		<nav>
+		<a href="../index.php">Salir</a>
+			
+			
+
+		</nav>
+		</div>
+	</header>
+
+	<!--ZONA DEL REGISTRO-->
+
+		<div class="login-box">
+			
+			<h1>Registro del producto</h1>
+			<form method="post" action="registro_material.php" class="form-register" onsubmit="return valida();">
+
+				<!--categoria-->
+				<label for="categoria">Categoria</label>
+				<input type="text" placeholder="Introduce una categoria" name="categoria">
+
+				<!--marca-->
+				<label for="marca">Marca</label>
+				<input type="text" placeholder="Introduce la marca" name="marca">
+
+				<!--deacripcion-->
+				<label for="descripcion">Descripcion</label>
+				<input type="text" placeholder="Introduce la descripcion" name="descripcion">
+
+				<!--precio-->
+				<label for="precio">Precio</label>
+				<input type="text" placeholder="Introduce el precio" name="precio">
+
+				<!--cantidad-->
+				<label for="cantidad">Cantidad</label>
+				<input type="text" placeholder="Introduce la cantidad" name="cantidad">
+
+				<!--imagen-->
+				<label for="imagen">imagen</label>
+				<input type="file" placeholder="Introduce una imagen" name="imagen">
+
+				<input type="submit" name="submit" value="Registrar">
+			</form>
+		</div>
+
+		<?php
+			if (isset($_POST['submit'])){
+			require("registro_material.php");
+		}
+		?>
+
+		
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LOGIN</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/estilos_admin.css">
+</head>
+<body>
+
+	<!--zona del logo y del login-->
+
+	<header>
+		<div class="wrapper">
+		<div class="logo">
+			<a href="../index.php"><img src="../img/logo2.png" width="200px" height="150px"></a>
+		</div>
+		<nav>
+			<a href="#">Inicio sesión</a>
+			<a href="quienes_somos.html">Quienes somos</a>
+			<a href="#">Carrito: </a>
+
+		</nav>
+		</div>
+	</header>
+	
+	<!--Zona del menu desplegable -->
+	
+	
+
+		<!--ZONA DEL LOGIN-->
+
+		<div class="login-box">
+			<img class="avatar" src="../img/logo1.png" alt="logo si">
+			<h1>Login Here</h1>
+			<form method="post" action="administrador.php">
+				<!--username-->
+				<label for="username">Username</label>
+				<input type="text" placeholder="Enter username" name="username">
+
+				<!--password-->
+				<label for="password">Password</label>
+				<input type="password" placeholder="Enter password" name="password">
+
+				<input type="submit" value="Log In">
+
+				<a href="#">Lost your pasword?</a></br>
+				<a href="registro.php">¿No tienes cuenta aún?</a>
+			</form>
+		</div>
+
+</body>
+</html>

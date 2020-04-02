@@ -1,0 +1,28 @@
+<?php
+
+$username=$_POST['username'];
+$password=$_POST['password'];
+
+//conectar a la BD
+
+$conexion=mysqli_connect("localhost", "root", "", "tienda");
+$consulta="SELECT * FROM admin WHERE username='$username' and password='$password' ";
+
+//EJECUTAR LA CONSULTA
+$resultado=mysqli_query($conexion, $consulta);
+
+//VALIDAR CONSULTA
+$filas=mysqli_num_rows($resultado);
+
+if ($filas > 0) {
+	header("location:../admin/panel_admin.html");
+	echo "Bienvenido";
+}
+else{
+	echo "El usuario no existe";
+}
+mysqli_free_result($resultado);
+mysqli_close($conexion); 
+
+
+?>
