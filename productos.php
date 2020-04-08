@@ -1,18 +1,18 @@
 <?php 
-  if(isset($_GET['action']) && $_GET['action']=="agregar"){       
+  if(isset($_GET['action']) && $_GET['action']=="agregar"){  
     $id=intval($_GET['id']);   
     if(isset($_SESSION['carrito'][$id])){ 
       $_SESSION['carrito'][$id]['cantidad']++;       
     }else{ 
-      $sql3="SELECT * FROM productos 
-             WHERE Id={$id}
-             AND id_categoria = 1"; 
+      $sql3="SELECT * FROM products 
+             WHERE id={$id}
+             AND category_id = 2"; 
       $result3=mysqli_query($con, $sql3); 
       if(mysqli_num_rows($result3)!=0){ 
         $producto2=mysqli_fetch_array($result3); 
-        $_SESSION['carrito'][$producto2['Id']]=array( 
+        $_SESSION['carrito'][$producto2['id']]=array( 
                   "cantidad" => 1, 
-                  "precio" => $producto2['precio']); 
+                  "price" => $producto2['price']); 
       }else{ 
         $mensaje="El codigo del producto es invalido";           
       }       
@@ -27,13 +27,14 @@
   } 
 ?> 
 <?php
-  $sql20 = "SELECT * FROM productos WHERE id_categoria = 1";
+  $sql20 = "SELECT * FROM products WHERE category_id = 2";
   $result20 = mysqli_query($con, $sql20);
 
-  while ($producto = mysqli_fetch_array($result20)) { ?>
+  while ($products_sort = mysqli_fetch_array($result20)) { ?>
     <section class="uno">
-      <img src="img/<?php echo $producto['imagen']; ?>" width="250px" height="150px" alt="<?php echo $producto['marca']; ?>">
- 	  <h2><a href="#" class="vend"><?php echo $producto['descripcion']; ?></a></h2>
-	  <h3><a href="index.php?pagina=productos&action=agregar&id=<?php echo $producto['Id']; ?>" class="preci" value="<?php echo $producto['Id']; ?>"> <?php echo $producto['precio']; ?> €</a></h3>		
-    </section>		
+				<img src="<?php echo $products_sort['img'] ?>" width="200px" height="150px">
+				<h2><a href="#" class="vend"><?php echo $products_sort['name']; ?></a></h2>
+				<h3><a href="#" class="preci"><?php echo $products_sort['price']; ?>€</a></h3>
+				<a href="index.php?pagina=productos&action=agregar&id=<?php echo $products_sort['id']; ?>" class="carro" value="<?php echo $products_sort['id']; ?>">Añadir al carrito</a>
+		</section>		
 <?php } ?>
