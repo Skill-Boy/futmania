@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 08-04-2020 a las 22:35:36
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.3.15
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 27-03-2020 a las 18:58:27
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -48,10 +48,10 @@ INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 --
 
 CREATE TABLE `carrito` (
-  `id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `id_productos` int(11) NOT NULL,
-  `cantidad` double DEFAULT NULL,
-  `id_usuarios` int(11) DEFAULT NULL
+  `cantidad` double NOT NULL,
+  `id_usuarios` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -70,7 +70,6 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `categoria`) VALUES
-(0, 'futbol_masculino'),
 (1, 'equipaciones_futsal'),
 (2, 'zapatillas_futsal'),
 (3, 'futbol femenino'),
@@ -80,32 +79,6 @@ INSERT INTO `categoria` (`id`, `categoria`) VALUES
 (7, 'arbitraje'),
 (8, 'balones'),
 (9, 'material');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `category`
---
-
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `category`
---
-
-INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'Futbol Maculino'),
-(2, 'Futbol Femino'),
-(3, 'Botas Futbol'),
-(4, 'Complementos Futbol'),
-(5, 'Equipo árbitros'),
-(6, 'Zapatillas arbitro'),
-(7, 'Complementos arbitros'),
-(8, 'Balones'),
-(9, 'General');
 
 -- --------------------------------------------------------
 
@@ -338,82 +311,6 @@ CREATE TABLE `productos_venta` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `products`
---
-
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `stock` int(11) NOT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `img` varchar(255) DEFAULT NULL,
-  `price` decimal(5,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `products`
---
-
-INSERT INTO `products` (`id`, `name`, `stock`, `category_id`, `img`, `price`) VALUES
-(1, 'Camiseta Barcelona', 80, 1, 'img/fut_masculino/barcelona.jpg', '85.20'),
-(2, 'Camiseta Atletico de Madrid', 45, 1, 'img/fut_masculino/atletico.png', '50.30'),
-(3, 'Camiseta Real Betis', 70, 1, 'img/fut_masculino/betis.jpg', '70.00'),
-(4, 'Camiseta Alaves', 40, 1, 'img/fut_masculino/alaves.jpg', '60.50'),
-(5, 'Camiseta Bilbao', 10, 1, 'img/fut_masculino/bilbao.jpg', '77.10'),
-(6, 'Camiseta Celta de Vigo', 90, 1, 'img/fut_masculino/celta.jpg', '35.90'),
-(7, 'Camiseta Real Madrid', 100, 1, 'img/fut_masculino/madrid.jpg', '100.20'),
-(8, 'Camiseta Villareal F.C', 60, 1, 'img/fut_masculino/villareal.jpg', '45.89'),
-(9, 'Camiseta Sevilla', 89, 1, 'img/fut_masculino/sevilla.png', '77.00'),
-(10, 'Camiseta Getafe', 5, 1, 'img/fut_masculino/getafe.jpg', '10.00'),
-(11, 'Camiseta Atletico de Madrid', 40, 2, 'img/futbol_femenino/atletico.jpg', '45.56'),
-(12, 'Camiseta Barcelona', 80, 2, 'img/futbol_femenino/barsa.jpg', '80.99'),
-(13, 'Camiseta Real Madrid', 45, 2, 'img/futbol_femenino/madrid.png', '78.00'),
-(14, 'Camiseta Valencia', 20, 2, 'img/futbol_femenino/valencia.jpg', '99.45'),
-(15, 'ADIDAS Predator Mania FG', 100, 3, 'img/botas_futbol/adidas1.jpg', '349.00'),
-(16, 'ADIDAS Predator 20+ FG', 12, 3, 'img/botas_futbol/adidas2.jpg', '225.00'),
-(17, 'ADIDAS Copa Mundial', 45, 3, 'img/botas_futbol/adidas3.jpg', '112.15'),
-(18, 'ADIDAS Predator 20.3', 2, 3, 'img/botas_futbol/adidas4.jpg', '62.95'),
-(19, 'ADIDAS Nemeziz 19.1', 78, 3, 'img/botas_futbol/adidas5.jpg', '153.90'),
-(20, 'ADIDAS X 19.1', 200, 3, 'img/botas_futbol/adidas6.jpg', '153.45'),
-(21, 'NIKE Mercurial FC Barcelona', 45, 4, 'img/futbol_complementos/espinilleras1.jpg', '13.47'),
-(22, 'Espinilleras PUMA Futures 19.2', 89, 4, 'img/futbol_complementos/espinilleras2.jpg', '14.97'),
-(23, 'Mochila ADIDAS GYMSACK OE', 30, 4, 'img/futbol_complementos/mochila1.jpg', '5.23'),
-(24, 'UMBRO zaatillero', 12, 4, 'img/futbol_complementos/mochila2.jpg', '6.95'),
-(25, 'Kit de brazaletes de capitan JOMA', 89, 4, 'img/futbol_complementos/brazalete.jpg', '1.90'),
-(26, 'NIKE chanclas', 5, 4, 'img/futbol_complementos/chanclas2.jpg', '28.00'),
-(27, 'Equipacion Arbitro amarilla KELM', 30, 5, 'img/arbitro_equi/equi1.jpg', '19.95'),
-(28, 'Equipacion Arbitro negro KELME', 15, 5, 'img/arbitro_equi/equi2.jpg', '19.95'),
-(29, 'Camiseta arbitro salmon', 80, 5, 'img/arbitro_equi/equi3.jpg', '12.51'),
-(30, 'Camiseta arbitro rayas', 10, 5, 'img/arbitro_equi/equi4.jpg', '18.90'),
-(31, 'Camiseta arbitro manga larga amarilla', 5, 5, 'img/arbitro_equi/equip5.jpg', '10.90'),
-(32, 'Camiste arbitro manga larga negra', 89, 5, 'img/arbitro_equi/equip6.jpg', '10.90'),
-(33, 'Adidas Copa Mundial multitaco', 46, 6, 'img/arbitro_zapatilla/zap1.jpg', '149.90'),
-(34, 'Adidas Mundial Team Turf', 20, 6, 'img/arbitro_zapatilla/zap2.jpg', '94.99'),
-(35, 'Adidas Copa Mundial taco alumnio', 12, 6, 'img/arbitro_zapatilla/zap3.jpg', '159.99'),
-(36, 'JOMA Aguila Gol multitaco', 23, 6, 'img/arbitro_zapatilla/zap4.jpg', '49.50'),
-(37, 'Patrick Gold Cup', 2, 6, 'img/arbitro_zapatilla/zap5.jpg', '79.50'),
-(38, 'Set 2 banderines linier liga-C', 50, 7, 'img/arbitro/banderas1.jpg', '12.90'),
-(39, 'Set 2 banderines linier con funda', 40, 7, 'img/arbitro/banderas2.jpg', '14.95'),
-(40, 'Reloj CASIO amarillo', 25, 7, 'img/arbitro/reloj.jpg', '29.90'),
-(41, 'Reloj CASIO azul', 15, 7, 'img/arbitro/reloj1.jpg', '29.90'),
-(42, 'Spray marcador de posicion', 56, 7, 'img/arbitro/spray.jpg', '12.40'),
-(43, 'Monedas sorteo arbitro', 100, 7, 'img/arbitro/spray.jpg', '2.50'),
-(44, 'Balon UCL Finale Estambul 2020', 77, 8, 'img/balones/balon_cham.jpg', '34.95'),
-(45, 'Puma-Balon Laliga 2020', 1, 8, 'img/balones/balon_laliga.jpg', '35.95'),
-(46, 'Adidas-Balon eurocup 2020', 400, 8, 'img/balones/balon_eurocup.jpg', '30.90'),
-(47, 'DERBYSTAR-Balon Bundesliga 2020', 200, 8, 'img/balones/balon_bundesliga.jpg', '15.90'),
-(48, 'Adidas-Balon Mundia 2002', 130, 8, 'img/balones/balon_mundial_2002.jpg', '45.00'),
-(49, 'Nike-Balon Premier League 2020', 315, 8, 'img/balones/balon_premier.jpg', '25.00'),
-(50, 'Pizarra tactica magnetica (45x60)', 80, 9, 'img/general/pizarra1.jpg', '39.95'),
-(51, 'Carpeta con pizarra magnetica', 45, 9, 'img/general/pizarra3.jpg', '19.95'),
-(52, 'Adidas performance bidon 750ml', 10, 9, 'img/general/botellin2.jpg', '5.94'),
-(53, 'Paquete de entrenamiento', 22, 9, 'img/general/img1.jpg', '27.95'),
-(54, 'Disco de señal entrenamiento', 89, 9, 'img/general/img11.jpg', '12.45'),
-(55, 'Set de conos de entrenamiento', 89, 9, 'img/general/img12.jpg', '7.95');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -467,7 +364,7 @@ ALTER TABLE `admin`
 -- Indices de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`Id`),
   ADD KEY `id_productos` (`id_productos`,`id_usuarios`),
   ADD KEY `id_usuarios` (`id_usuarios`);
 
@@ -475,12 +372,6 @@ ALTER TABLE `carrito`
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `category`
---
-ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -498,13 +389,6 @@ ALTER TABLE `productos_venta`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `id_venta` (`id_venta`,`id_productos`),
   ADD KEY `id_productos` (`id_productos`);
-
---
--- Indices de la tabla `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -533,13 +417,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
-
---
--- AUTO_INCREMENT de la tabla `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -552,12 +430,6 @@ ALTER TABLE `productos`
 --
 ALTER TABLE `productos_venta`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -580,7 +452,7 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `carrito`
   ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`Id`),
-  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`id_productos`) REFERENCES `products` (`id`);
+  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`Id`);
 
 --
 -- Filtros para la tabla `categoria`
@@ -594,12 +466,6 @@ ALTER TABLE `categoria`
 ALTER TABLE `productos_venta`
   ADD CONSTRAINT `productos_venta_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`Id`),
   ADD CONSTRAINT `productos_venta_ibfk_2` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`Id`);
-
---
--- Filtros para la tabla `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 --
 -- Filtros para la tabla `ventas`

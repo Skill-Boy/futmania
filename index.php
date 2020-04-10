@@ -6,6 +6,7 @@
   include "configs/funciones.php";
 ?>
 
+<!--Se usan variables de sesion para que el carrito mantenga los productos escodigos-->
 <?php   
   if(isset($_GET['pagina'])) { 
     $paginas=array("productos", "carrito"); 
@@ -18,6 +19,7 @@
       $_pagina="productos"; 
   } 
 ?>
+<!--Fin $_pagina agarra el nombre del archivo sin la extension.php tu variable tiene que llamarse como el archivo-->
 
 <!DOCTYPE html>
 <html>
@@ -104,11 +106,13 @@
 	<!--Zona de lo mas vendido -->
   
 	<section id="categorias">
+	<!-- Llamas el archivo y la añades la extension -->
 	  <?php require($_pagina.".php"); ?>
-
+    <!--FIn del llamado-->
 	  <div>
 	  <br>	  	  
 	  <h1>Carrito</h1> 
+	  <!--Si existe la sesion del carrito con su respectivo archivo se llama-->
 	  <?php 
         if(isset($_SESSION['carrito']) && $_SESSION['carrito']) {   
           $sql5="SELECT * FROM products WHERE id IN ("; 
@@ -122,12 +126,14 @@
       <p> <b>Producto: <img src=" <?php echo $producto5['img']; ?>" width="50px" height="50px"> <?php echo $producto5['name'] ?> x <?php echo $_SESSION['carrito'][$producto5['id']]['cantidad'] ?></p></b> 
 	  <?php } ?> 
 	    <hr style="border: 1px black solid;">
+		<!--Tiene que tener el mismo nombre del archivo el ?pagina es el nombre de la variable para el cambio no tiene archivo en si se usa para cambiar a los archivos que se usan con las otras variables-->
 		<a href="index.php?pagina=carrito">Ir al carrito</a> 
       <?php      
         }else{   
           echo "<p>Tu carrito esta vacio. Por favor agrega productos.</p>"; 
-        } 
+		} 
 	  ?>
+	  <!--FIn del archivo-->
 	  </div>
 	  </section>
 	  <!--Zona de los metodos de seguridad y envio -->

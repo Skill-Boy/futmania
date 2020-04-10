@@ -1,21 +1,19 @@
-<!--Lo mismo se comprueba que existan las variables anteriores del index.php-->
 <?php
   if(isset($_POST['submit'])){ 
     if(isset($_POST['cantidad']) != '')  
     foreach($_POST['cantidad'] as $key => $val) { 
       if($val==0) { 
-        unset($_SESSION['carrito'][$key]); 
+        unset($_SESSION['carrito_masculino'][$key]); 
       }else{ 
-        $_SESSION['carrito'][$key]['cantidad'] = $val; 
+        $_SESSION['carrito_masculino'][$key]['cantidad'] = $val; 
       } 
     } 
   }
 ?>
-<!--FIn del index .php-->
 <section class="uno" style="width: 70%; margin-right: 10px;">
-<h1>Productos en carrito</h1> 
-<a href="index.php?pagina=productos">Regresar a la pagina de productos</a> 
-<form method="post" action="index.php?pagina=carrito"> 
+<h1>Productos en carrito_masculino</h1> 
+<a href="futbol_masculino.php?pagina=productos_masculino">Regresar a la pagina de productos</a> 
+<form method="post" action="futbol_masculino.php?pagina=carrito_masculino"> 
     <br>  
     <table width="90%"> 
       <tr style="background-color: #48575D; 
@@ -28,7 +26,7 @@
           
       <?php 
         $sql4="SELECT * FROM products WHERE id IN ("; 
-          foreach($_SESSION['carrito'] as $id => $value) { 
+          foreach($_SESSION['carrito_masculino'] as $id => $value) { 
             $sql4.=$id.","; 
           } 
                       
@@ -38,15 +36,15 @@
 
           if($query3 != '')
           while($producto3=mysqli_fetch_array($query3)){ 
-            $subtotal=$_SESSION['carrito'][$producto3['id']]['cantidad']*$producto3['price']; 
+            $subtotal=$_SESSION['carrito_masculino'][$producto3['id']]['cantidad']*$producto3['price']; 
             $PrecioTotal+=$subtotal; 
           ?> 
         
         <tr> 
-          <th width="50%" style="padding: 10px;"><img src=" <?php echo $producto3['img']; ?>" width="50px" height="50px"> <?php echo $producto3['name'] ?></td> 
-          <th width="10%"><input type="text" name="cantidad[<?php echo $producto3['id']; ?>]" size="5" value="<?php echo $_SESSION['carrito'][$producto3['id']]['cantidad']; ?>" /></td> 
+          <th width="50%" style="padding: 10px;"><img src="../../<?php echo $producto3['img']; ?>" width="50px" height="50px"> <?php echo $producto3['name'] ?></td> 
+          <th width="10%"><input type="text" name="cantidad[<?php echo $producto3['id']; ?>]" size="5" value="<?php echo $_SESSION['carrito_masculino'][$producto3['id']]['cantidad']; ?>" /></td> 
           <th width="15%"><?php echo $producto3['price'] ?>€</td> 
-          <th width="15%"><?php echo $_SESSION['carrito'][$producto3['id']]['cantidad']*$producto3['price']; ?>€</td> 
+          <th width="15%"><?php echo $_SESSION['carrito_masculino'][$producto3['id']]['cantidad']*$producto3['price']; ?>€</td> 
         </tr> 
         
         <?php } ?> 
@@ -56,12 +54,11 @@
     </table> 
     <br /> 
 
-    <!--Se usa el url para que se active el action del data del ajax y active la funcion php para guardas los datos cuando se hace click en comprar productos--->        
     <script>
       function Pedidos() { 
         $.ajax({ 
           type: "GET", 
-          url: 'http://localhost/futmania/index.php?pagina=carrito', 
+          url: 'http://localhost/futmania/public/views/futbol_masculino.php?pagina=carrito_masculino', 
           data:{action:'call_this'}, 
           success:function(html) { 
             alert("PRODUCTOS GUARDADO CORRECTAMENTE :D"); 
@@ -70,9 +67,9 @@
       } 
     </script>        
     <?php
-      if(empty(isset($_SESSION['carrito'])) != 1) {
-        echo '<button type="submit" name="submit">Actualizar Carrito</button>'; 
-        echo '<button name="pedido" onclick="Pedidos()">Comprar Productos</button>';
+      if(empty(isset($_SESSION['carrito_masculino'])) != 1) {
+        echo '<button type="submit" name="submit">Actualizar carrito</button>'; 
+        echo '<button name="pedido" onclick="Pedidos();">Comprar Productos</button>';
       }
     ?> 
 </form> 
@@ -83,12 +80,12 @@
 <?php
   if(isset($_GET['action']))
   if($_GET['action'] == 'call_this'){ 
-    include 'configs/funciones.php';
+    include '../../configs/funciones.php';
 
     $prod = [];
-    foreach($_SESSION['carrito'] as $id => $value) {
+    foreach($_SESSION['carrito_masculino'] as $id => $value) {
       $prod[] = $id;  
-      unset($_SESSION['carrito'][$id]);
+      unset($_SESSION['carrito_masculino'][$id]);
     } 
 
     foreach($prod as $ids => $value) {
